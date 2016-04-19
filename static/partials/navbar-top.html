@@ -1,0 +1,139 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-eye-open"></i> AuzoNet: El barrio conectado</a>
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+    </div>
+
+
+    <div id="top-nav" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a id="menuarriba" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-th-list glyphicon-white"></i>
+                    Opciones
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="#/mapa"><i class="glyphicon glyphicon-map-marker glyphicon-white"></i> Mapa general</a></li>
+                    <li><a ng-show="authService.isLoggedIn()" href="#/objetosDisp"><i class="glyphicon glyphicon-list-alt glyphicon-white"></i> Objetos disponibles</a></li>
+                    <li><a ng-show="authService.isLoggedIn()" href="#/opciones/objeto"><i class="glyphicon glyphicon-plus glyphicon-white"></i> Registrar un nuevo objeto</a>
+                </ul>
+            </li>
+        </ul>
+
+
+
+        <div class="nav navbar-form pull-right">
+            <div ng-show="!authService.isLoggedIn()">
+                <a href="#loginModal" role="button" class="btn btn-primary" data-toggle="modal">
+                    <i class="glyphicon glyphicon-log-in glyphicon-white"></i> Logearse</a>
+            </div>
+            <div ng-show="authService.isLoggedIn()">
+                <a class="btn btn-primary" ng-click="authService.logout()">
+                    <i class="glyphicon glyphicon-off glyphicon-white"></i> Desconectarse</a>
+            </div>
+        </div>
+
+        <div ng-show="authService.isLoggedIn()">
+            <ul class="nav navbar-nav pull-right">
+
+                <li ng-show="authService.isLoggedIn()" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user glyphicon-white"></i>
+                        <b class="caret"></b>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                       <!--<li><a href="#/opciones/perfil"> Perfil del usuario</a></li>-->
+                       <li><a ng-click="authService.perfilUsuario()"> Perfil del usuario</a></li>
+                        <li><a ng-click="authService.objetosUsuario()">Objetos registrados <span id="numeroObjetos" class="badge"></span></a></li>
+                        <li ng-show="!authService.esAdmin()"><a href="#/">Administrar AuzoNet</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+
+<div class="modal" id="loginModal" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Conectarse</h4>
+            </div>
+            <div class="modal-body">
+                <span id="login-email">Email</span>
+                <input id ="usuario" ng-model="loginInput" type="text" placeholder="Email" name='username'>
+                <span id="login-password">Contraseña</span>
+                <input ng-model="passwordInput" type="password" placeholder="Password" name='password'>
+                <a ng-click="authService.recuperacion()">¿Ha olvidado la contraseña?</a>
+                <span ng-show="authService.loginIncorrecto()" class="alert alert-danger">La contraseña o el usuario <strong>no</strong> son correctos.</span>
+                <span ng-show="authService.error()" class="alert alert-danger"><strong>Error</strong> al intentar conectarse al servidor. Compruebe la conexión a internet.</span>
+            </div>
+            <div class="modal-footer">
+                <a id="botonLogin" class="btn btn-primary" ng-click="authService.login(loginInput, passwordInput)">
+                    <i class="glyphicon glyphicon-log-in glyphicon-white"></i> Conectarse</a>
+                <a href="#/opciones/registro" class="btn btn-primary" data-dismiss="modal">
+                    <i class="glyphicon glyphicon-pencil glyphicon-white"></i> Registrarse</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="recuperar" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Recuperar contraseña</h4>
+            </div>
+            <div class="modal-body">
+                <span id="login-email">Introduzca su email para intentar recuperar su cuenta:</span>
+                <input id ="recContra" ng-model="emailRec" type="text" placeholder="Email" name='username'>
+                <span ng-show="authService.introducirEmail()" class="alert alert-danger">Introduce un email por favor</span>
+                <span ng-show="authService.recuperarIncorrecto()" class="alert alert-danger">El email introducido <strong>no</strong> existe.</span>
+                <span ng-show="authService.error()" class="alert alert-danger"><strong>Error</strong> al intentar conectarse al servidor. Compruebe la conexión a internet.</span>
+                <p ng-show="authService.recuperacionRealizada()" class="alert alert-success">Su contraseña ha sido enviado a su correo electrónico. Compruebe la bandeja de SPAM si no encuentra nuestro email. Le recomendamos que cambie la contraseña en el panel de control.</p>
+            </div>
+            <div class="modal-footer">
+                <a id="botonRecuperar" class="btn btn-primary" ng-click="authService.recuperar(emailRec)">
+                    <i class="glyphicon glyphicon-repeat glyphicon-white"></i> Recuperar contraseña</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="necesarioLogin" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">¡Es necesario conectarse!</h4>
+            </div>
+            <div class="modal-body">
+                <p  class="alert alert-info">Para poder acceder a mayor información sobre un objeto, es necesario conectarse en Auzonet. Debe conectarse con su cuenta o registrarse en el sistema para visualizar en detalle cualquier objeto.</p>
+            </div>
+            <div class="modal-footer">
+                <a id="botonAceptarModal" class="btn btn-primary" data-dismiss="modal">
+                    <i class="glyphicon glyphicon-ok-circle glyphicon-white"></i> Aceptar</a>
+                <a href="#/opciones/registro" id="botonRegistrarseModal" class="btn btn-primary" ng-click="cerrarModalNecesario()">
+                    <i class="glyphicon glyphicon-pencil glyphicon-white"></i> Registrarse</a>
+                <a id="botonConectarseModal" class="btn btn-primary" ng-click="mostrarLogin()">
+                    <i class="glyphicon glyphicon-log-in glyphicon-white"></i> Conectarse</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,50 @@
+
+<script>
+    $( document ).ready(function() {
+        43.270691, -2.939148
+        var map = L.map('map').setView([43.270691, -2.939148], 18);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'kevincifu.onajiefm',
+            accessToken: 'pk.eyJ1Ijoia2V2aW5jaWZ1IiwiYSI6ImNpamg4ZmFoOTAwMTR2Zmx3c29ybmw0MHoifQ.1PZ8QgMZsQR7RdyZGoxdOw'
+        }).addTo(map);
+
+    var objeto = L.icon({
+    iconUrl: 'imagenes/deusto.jpeg',
+
+    iconSize:     [45, 45]
+});
+    var marcador = L.marker([43.270691, -2.939148], {icon: objeto});
+    marcador.bindPopup("<div><h3>Universidad de Deusto / University of Deusto</h3><br><p>Una de las más prestigiosas universidades a nivel estatal.</p><br><p>Dar un tour:<br><iframe width='560' height='315' src='https://www.youtube.com/embed/-OBvS2-Z4b0' frameborder='0' allowfullscreen></iframe></p></div>");
+    marcador.addTo(map);
+    });
+</script>
+
+<div class="container" fade-in>
+
+
+    <div style="padding-top: 2em;">
+
+        <div class="jumbotron">
+
+            <div class="page-header">
+                <h1>AuzoNet: El Barrio Conectado</h1>
+            </div>
+            <div>
+
+                <p>Proyecto de Desarrollo Avanzado de Software de la Universidad de Deusto</p>
+
+            </div>
+            <div class="google-maps" id="map"></div>
+
+            <a class="btn btn-large btn-primary" href="http://www.deusto.es/cs/Satellite/deusto/es/universidad-deusto">Más información...</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Notifications -->
+<div noty ng-repeat="n in notifications"/>

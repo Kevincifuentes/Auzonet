@@ -1,0 +1,93 @@
+
+<!-- TODO:  Add confirmation notification on save, should only be red on save pressed or on leave field.  Not automatically. -->
+
+<div id="objetosUsuario" ng-controller="OpcionesController" fade-in>
+
+    <div id="container" class="container">
+        <%if (objetos.length == 0) { %>
+            <div class="page-header">
+            <br><br>
+            <h1>
+                Objetos del usuario <%= email %>
+            </h1>
+            </div>
+            <div class="jumbotron">
+            <div class="page-header">
+                <h2> No existen objetos para este usuario (<%= objetos.length %>)</h2>
+                <h2> Puede pasar a añadir nuevos objetos: </h2>
+                <a class="btn btn-large btn-primary" href="#/opciones/objeto">Añadir Objetos</a>
+            </div>
+            </div>
+        <% } %>
+        <%if (objetos.length > 0) { %>
+            <div class="page-header">
+            <br><br>
+            <h1>
+                Objetos del usuario <%= email %>
+            </h1>
+            </div>
+            <% objetos.forEach( function ( todo ){ %>
+                <br>
+                <div id="<%= todo._id %>" class="jumbotron">
+                    <div style="padding-bottom: 1em;" class="pull-right">
+                    <div class="google-maps"><iframe
+                      width="600"
+                      height="450"
+                      frameborder="0" style="border:0"
+                      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC_GjRfDb3Orp0tWXFLo3WNx__JT1MhlZ4
+                        &q=<%= todo.localizacion.latitud %>,<%= todo.localizacion.longitud %>" allowfullscreen>
+                    </iframe>
+                    </div>
+                    </div>
+                    <div class="page-header">
+                        <h2> <%= todo.objeto %> </h2>
+                    </div>
+                    <div>
+                        <p><u>Descripción del objeto:</u> <%= todo.descripcion %></p>
+                    </div>
+                    <div>
+                        <p><u>Estado:</u> <%= todo.estado %></p>
+                    </div>
+                    <div>
+                        <p><u>Teléfono:</u> <%= todo.telefono %></p>
+                    </div>
+                    <a id="btneliminar" class="btn btn-large btn-primary" onClick="eliminarObjeto(<%= todo._id %>,'<%= todo.objeto %>')"><i class="glyphicon glyphicon-remove-circle glyphicon-white"></i> Eliminar</a>
+                    <a id="btneditar" class="btn btn-large btn-primary" onClick="editar(<%= todo._id %>)"><i class="glyphicon glyphicon-edit glyphicon-white"></i> Editar</a>
+                </div>
+            <% }); %>
+        <% } %>
+        <!--<pre>form = {{usuario | json}}</pre>
+        <pre>master = {{master | json}}</pre>-->
+    </div>
+
+</div>
+<div class="modal" id="eliminado" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Objeto eliminado correctamente</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-success">El objeto seleccionado se ha eliminado correctamente</p>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="eliminarERROR" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Error en la eliminación</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-danger">Parece que actualmente tenemos problemas para eliminar ese objeto. Por favor, inténtelo de nuevo más tarde.</p>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

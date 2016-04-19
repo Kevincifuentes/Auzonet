@@ -1,0 +1,88 @@
+
+<!-- TODO:  Add confirmation notification on save, should only be red on save pressed or on leave field.  Not automatically. -->
+
+<div fade-in>
+
+    <div class="container">
+        <div class="form-row">
+        <div class="page-header">
+            <br><br>
+            <h1>
+                Perfil del usuario <%= email %>
+            </h1>
+        </div>
+        </div>
+        <div class="well">
+            <form novalidate class="container css-form">
+                <div class="container form-row" align="center">
+                <img class="imagen" align="center" src="imagenes/avatar.jpg"></img>
+                </div>
+                <div class="container form-row">
+                    <b>Nombre:</b><input id="nombre" class="form-control" type="text" value="<%= nombre %>" ng-model="conectado.nombre" required/>
+                </div>
+                <div class="container form-row">
+                    <b>Apellido:</b><input id="apellido" class="form-control" type="text" value="<%= apellido %>" ng-model="conectado.apellido" required/>
+                </div>
+                <div class="container form-row">
+                    <b>Género:</b> <%= genero %><br/>
+                </div>
+                <div class="container form-row">
+                    <b>E-mail:</b><input id="email" class="form-control" type="email" value="<%= email %>" ng-model="conectado.email"
+                                                    disabled/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Contraseña:</b><input id="contrasena" class="form-control" type="password" value="<%= contrasena %>" ng-model="conectado.contrasena"
+                                                    required/><br/>
+                </div>
+
+                <div style="padding-top: 1em;" class="container form-row">
+                    <a id="botonActualizar" class="btn btn-primary" onClick="actualizarUsuario()">Actualizar perfil</a>
+                </div>
+                <div class="container form-row">
+                </div>
+                <div class="container form-row">
+                <br>
+                <p ng-show="algoIncompletoActualizar()" class="alert alert-info">
+                    Rellena <strong>todos</strong> los apartados del formulario para actualizar correctamente tu usuario.
+                </p>
+                <br><br>
+                </div>
+            </form>
+
+        </div>
+        <!--<pre>form = {{usuario | json}}</pre>
+        <pre>master = {{master | json}}</pre>-->
+
+    </div>
+
+</div>
+<div class="modal" id="actualizacionOK" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">¡Actualización correcta!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-success">La actualización del perfil se ha realizado correctamente.</p>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="actualizacionERROR" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Error en la actualización</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-danger">Parece que actualmente tenemos problemas para actualizar su perfil. Por favor, inténtelo de nuevo más tarde.</p>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

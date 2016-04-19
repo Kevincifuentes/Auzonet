@@ -1,0 +1,72 @@
+
+<!-- TODO:  Add confirmation notification on save, should only be red on save pressed or on leave field.  Not automatically. -->
+
+<div fade-in>
+    <div class="container">
+        <div class="page-header">
+            <br><br>
+            <h1>
+                Añadir un nuevo objeto
+            </h1>
+            </div>
+        <div class="well">
+            <form name="objeto" novalidate class="container css-form">
+                <div class="container form-row">
+                    <b>Introducir imagen del objeto (Utilizar herramientas online como <a href="http://imgur.com/">Imgur.com</a>, <a href="http://postimage.org/">PostImage.org</a> o similares)</b> <input class="form-control" type="text" ng-model="objeto.foto" required/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Nombre del objeto:</b> <input class="form-control" type="text" ng-model="objeto.nombre" required/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Descripción:</b> <textarea class="form-control" type="text" ng-model="objeto.descripcion" required/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Localización (Utilizar el buscador para encontrar la ubicación deseada):</b><br><input id="pac-input" class="controls" type="text" placeholder="Busque la localización..."><div class="google-maps"id="map"></div>
+                    <script src="https://maps.googleapis.com/maps/api/js?&libraries=places&callback=initAutocomplete"
+                    async defer></script>
+                    <span>Latitud: </span><input id="latitud" type="text" ng-model="objeto.latitud"></span><span> Longitud: </span><input id="longitud" type="text" ng-model="objeto.longitud"></span><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Estado (Nuevo/Casi Nuevo/Seminuevo/Usado/etc.):</b> <input class="form-control" type="text" ng-model="objeto.estado"
+                                                    required/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Teléfono de contacto:</b> <input name="numero" class="form-control" type="text" ng-model="objeto.telefono" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required/>
+                    <span class="alert alert-warning" ng-show="objeto.numero.$error.pattern">El número introducido no es válido</span>
+                    <br/>
+                </div>
+                <div style="padding-top: 1em;" class="container form-row">
+                    <a id="aLimpiar" class="btn btn-primary" ng-click="objeto = '';">Limpiar</a>
+                    <a id="anadir" class="btn btn-primary" ng-click="guardarObjeto(objeto)">Guardar Objeto</a>
+                </div>
+                <br>
+                <div class="container form-row">
+                <p ng-show="objetoIncompleto()" class="alert alert-info">
+                    Rellena <strong>todos</strong> los apartados del formulario para añadir un objeto correctamente.
+                </p>
+                </div>
+            </form>
+
+        </div>
+        <!--<pre>form = {{objeto | json}}</pre>
+        <pre>master = {{master | json}}</pre>-->
+
+    </div>
+
+</div>
+<div class="modal" id="anadirCorrecto" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">¡Objeto añadido correctamente!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-success">El objeto ha sido añadido <strong>correctamente</strong> a nuestro sistema y pronto estará disponible. En breve recibirá un email de confirmación.</p>
+            </div>
+            <div class="modal-footer">
+                <a id="botonLogin" class="btn btn-primary" ng-click="redireccionarMapa()">
+                    <i class="glyphicon glyphicon-refresh"></i>Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>

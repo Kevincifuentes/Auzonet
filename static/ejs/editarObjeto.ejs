@@ -1,0 +1,95 @@
+
+<!-- TODO:  Add confirmation notification on save, should only be red on save pressed or on leave field.  Not automatically. -->
+<script>
+    $( document ).ready(function() {
+        forzarBusqueda();
+    });
+
+
+</script>
+<div fade-in>
+    <div class="container">
+        <div class="form-row">
+        <div class="page-header">
+            <br><br>
+            <h1>
+                Objeto <%= objeto.objeto %>
+            </h1>
+        </div>
+        </div>
+        <div class="well">
+        <img class="imagen" align="center" src="<%= objeto.foto %>"></img>
+            <form novalidate class="container css-form">
+                <div class="container form-row">
+                    <b>Nombre del objeto:</b><input id="nombreObjeto" class="form-control" type="text" value="<%= objeto.objeto %>" ng-model="objeto.nombre" required/>
+                </div>
+                <div class="container form-row">
+                    <b>Descripción:</b><textarea id="descripcion" class="form-control" type="text" ng-model="objeto.descripcion" required><%= objeto.descripcion %></textarea>
+                </div>
+                <div class="container form-row">
+                    <b>Estado:</b> <input id="estado" class="form-control" type="text" value="<%= objeto.estado %>" ng-model="objeto.estado" required/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Propietario:</b><input id="email" class="form-control" type="email" value="<%= objeto.email %>" ng-model="objeto.email"
+                                                    disabled/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Teléfono:</b><input id="telefono" name="numero" class="form-control" value="<%= objeto.telefono %>" type="text" ng-model="objeto.telefono" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required/><br/>
+                </div>
+                <div class="container form-row">
+                    <b>Localización (Utilizar el buscador para encontrar la ubicación deseada):</b><br><input id="pac-input" valueclass="controls" type="text" value="<%= objeto.localizacion.latitud %>,<%= objeto.localizacion.longitud %>" onload="forzarBusqueda()"><div class="google-maps"id="map"></div>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqTiLP6Umw6sGhPF_cII-KYsFTJ8RxTjs&libraries=places&callback=initAutocomplete"
+                    async defer></script>
+                    <span>Latitud: </span><input id="latitud" type="text" value="<%= objeto.localizacion.latitud %>" ng-model="objeto.latitud"></span><span> Longitud: </span><input id="longitud" type="text" value="<%= objeto.localizacion.longitud %>" ng-model="objeto.longitud"></span><br/>
+                </div>
+                <div style="padding-top: 1em;" class="container form-row">
+                    <a id="botonActualizarObjeto" class="btn btn-primary" onClick="actualizarObjeto(<%= objeto._id %>)">Actualizar objeto</a>
+                </div>
+                <div class="container form-row">
+                </div>
+                <div class="container form-row">
+                <br>
+                <p ng-show="algoIncompletoActualizarObjeto()" class="alert alert-info">
+                    Rellena <strong>todos</strong> los apartados del formulario para actualizar correctamente el objeto.
+                </p>
+                <br><br>
+                </div>
+            </form>
+
+        </div>
+        <!--<pre>form = {{usuario | json}}</pre>
+        <pre>master = {{master | json}}</pre>-->
+
+    </div>
+
+</div>
+<div class="modal" id="actualizacionOK" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">¡Actualización correcta!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-success">La actualización del objeto se ha realizado correctamente.</p>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="actualizacionERROR" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Error en la actualización</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-danger">Parece que actualmente tenemos problemas para actualizar el objeto. Por favor, inténtelo de nuevo más tarde.</p>
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

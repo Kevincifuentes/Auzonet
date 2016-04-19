@@ -1,0 +1,25 @@
+<!--see http://angular-ui.github.com/ng-grid/#/api for more  -->
+
+<!-- Filtering via the header button appears to be broken.  Hide button for now... -->
+<style>
+    .ngHeaderButton {
+        display: none;
+    }
+</style>
+
+<br><br>
+<div class="container">
+<div class="page-header">
+                <h1>Objetos disponibles en Auzonet</h1>
+</div>
+<div style="padding-bottom: 1em;" class="pull-right">
+<a id="botonActualizar" class="btn btn-primary" ng-click="actualizarGrid()">
+                    <i class="glyphicon glyphicon-refresh glyphicon-white"></i> Actualizar</a>
+</div>
+<p> En la siguiente tabla puede buscar entre todos los objetos disponibles en el sistema e intentar pedir el suyo contactando con el propietario via Email o Teléfono.</p>
+<!-- Everything about the grid is expected to be within the scope (done in controller) -->
+<i class="glyphicon glyphicon-search glyphicon-white"> </i><input ng-model="filterOptions.filterText" placeholder="Buscar..." type="text">
+<div class="table-responsive table-striped">
+<div class="gridStyle" ng-grid="gridOptions"></div>
+</div>
+</div>

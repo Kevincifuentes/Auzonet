@@ -1,0 +1,76 @@
+
+<!-- TODO:  Add confirmation notification on save, should only be red on save pressed or on leave field.  Not automatically. -->
+
+<div fade-in>
+
+    <div class="container">
+        <div class="form-row">
+        <br><br>
+            <h3>
+                Formulario de Registro en AuzoNet
+            </h3>
+            <hr>
+        </div>
+        <div class="well">
+            <form novalidate class="container css-form">
+                <div class="container form-row">
+                    Nombre:<input class="form-control" type="text" ng-model="usuario.nombre" required/><br/>
+                </div>
+                <div class="container form-row">
+                    Apellido:<input class="form-control" type="text" ng-model="usuario.apellido" required/><br/>
+                </div>
+                <div class="container form-row">
+                    E-mail:<input class="form-control" type="email" ng-model="usuario.email"
+                                                    required/><br/>
+                </div>
+                <div class="container form-row">
+                    Contraseña:<input class="form-control" type="password" ng-model="usuario.contrasena"
+                                                    required/><br/>
+                </div>
+                <div class="container form-row">
+                    Repite la contraseña:<input class="form-control" type="password" ng-model="usuario.repcontrasena"
+                                                    required/><br/>
+                </div>
+                 <div class="container form-row">
+                    Género: <input type="radio" ng-model="usuario.genero" value="hombre"/> Hombre
+                    <input type="radio" ng-model="usuario.genero" value="mujer"/> Mujer<br/>
+                </div>
+                <div style="padding-top: 1em;" class="container form-row">
+                    <a class="btn btn-primary" ng-click="usuario = '';">Limpiar</a>
+                    <a id="registro" class="btn btn-primary" ng-click="saveForm(usuario)">Registrarse</a>
+                </div>
+                <div class="container form-row">
+                <span ng-show="passwordIncorrecta()" class="alert alert-warning">
+                    La contraseña <strong>no</strong> coincide. Introduzcala de nuevo.
+                </span>
+                </div>
+                <div class="container form-row">
+                <span ng-show="algoIncompleto()" class="alert alert-info">
+                    Rellena <strong>todos</strong> los apartados del formulario para registrarse correctamente.
+                </span>
+                </div>
+            </form>
+
+        </div>
+        <!--<pre>form = {{usuario | json}}</pre>
+        <pre>master = {{master | json}}</pre>-->
+
+    </div>
+
+</div>
+<div class="modal" id="regCorrecto" fade-in>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">¡Registro correcto!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-success"><strong>Muchas gracias</strong> por registrarse en la web y en breve recibirá un <b>email de confirmación</b> de su registro. Ahora le recomendamos que se conecte para ver los objetos disponibles.</p>
+            </div>
+            <div class="modal-footer">
+                <a id="botonLogin" class="btn btn-primary" ng-click="redireccionar()">
+                    <i class="glyphicon glyphicon-refresh"></i>Conectarse</a>
+            </div>
+        </div>
+    </div>
+</div>

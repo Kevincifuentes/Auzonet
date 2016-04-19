@@ -1,0 +1,37 @@
+    <div class="container" fade-in>
+        <div class="form-row">
+            <h3>
+                Formulario de Registro en AuzoNet
+            </h3>
+            <hr>
+        </div>
+        <div class="well">
+            <form novalidate class="container css-form">
+                <div class="container form-row">
+                    Nombre:&nbsp;&nbsp;&nbsp;<input class="form-control" type="text" ng-model="usuario.nombre" required/>
+                </div>
+                <div class="container form-row">
+                    E-mail:&nbsp;&nbsp;&nbsp;<input class="form-control" type="email" ng-model="usuario.email"
+                                                    required/><br/>
+                </div>
+                <div class="container form-row">
+                    Género:&nbsp;&nbsp;&nbsp;<input type="radio" ng-model="usuario.genero" value="hombre"/>&nbsp;Hombre
+                    <input type="radio" ng-model="usuario.genero" value="mujer"/>&nbsp;Mujer<br/>
+                </div>
+
+                <div style="padding-top: 1em;" class="container form-row">
+                    <a class="btn btn-primary" ng-click="usuario = '';">Limpiar</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-primary" ng-click="saveForm(usuario)">Guardar</a>
+                </div>
+            </form>
+
+        </div>
+        <pre>form = {{usuario | json}}</pre>
+        <pre>master = {{master | json}}</pre>
+
+    </div>
+
+
+
+

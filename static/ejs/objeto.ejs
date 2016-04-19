@@ -1,0 +1,64 @@
+
+<!-- TODO:  Add confirmation notification on save, should only be red on save pressed or on leave field.  Not automatically. -->
+
+<div fade-in>
+
+    <div id="container" class="container">
+            <div class="page-header">
+            <br><br>
+
+            <h1>
+                 <a id="botonAtras" class="btn btn-primary" onclick="window.history.back()">
+                    <i class="glyphicon glyphicon-arrow-left glyphicon-white"></i> Volver atrás</a>  <%= objeto.objeto %>
+            </h1>
+            </div>
+                <br>
+                <div id="<%= objeto._id %>" class="jumbotron">
+                    <!-- IMAGEN -->
+                    <img class="imagen" src="<%= objeto.foto %>"></img>
+                    <div>
+                        <p><u>Nombre del objeto:</u> <%= objeto.objeto %></p>
+                    </div>
+                    <div>
+                        <p><u>Descripción del objeto:</u> <%= objeto.descripcion %></p>
+                    </div>
+                    <div>
+                        <p><u>Estado:</u> <%= objeto.estado %></p>
+                    </div>
+                    <div>
+                        <p><u>Teléfono del propietario:</u> <%= objeto.telefono %></p>
+                    </div>
+                    <div>
+                        <p><u>Email del propietario:</u> <a href="mailto:<%= objeto.email %>?Subject=<%= objeto.objeto %>" target="_top"><%= objeto.email %></a></p>
+                    </div>
+                </div>
+                <br>
+                <div class="jumbotron">
+                    <div id="disqus_thread"></div>
+                    <script>
+                    /**
+                    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                    */
+                    
+                    var disqus_config = function () {
+                    this.page.url = auzonet.net/<%= objeto._id %>; // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = <%= objeto._id %>; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+
+                    s.src = '//auzonet.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                    })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                </div>
+            <!--<pre>form = {{usuario | json}}</pre>
+            <pre>master = {{master | json}}</pre>-->
+        </div>
+
+</div>

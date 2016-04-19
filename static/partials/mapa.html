@@ -1,0 +1,44 @@
+
+<script>
+    $( document ).ready(function() {
+        var map = L.map('map', {zoomControl: true}).setView([43.261912, -2.938149], 13);
+        /*map.touchZoom.disable();
+        map.touchZoom.disable();
+        map.doubleClickZoom.disable();
+        map.scrollWheelZoom.disable();
+        map.boxZoom.disable();
+        map.keyboard.disable();
+        /*L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);*/
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'kevincifu.onadp726',
+            accessToken: 'pk.eyJ1Ijoia2V2aW5jaWZ1IiwiYSI6ImNpamg4ZmFoOTAwMTR2Zmx3c29ybmw0MHoifQ.1PZ8QgMZsQR7RdyZGoxdOw'
+        }).addTo(map);
+        cargarObjetosMapa(map);
+    });
+
+
+</script>
+<br><br>
+<div class="container">
+<div class="page-header">
+                <h1>Mapa de objetos en Auzonet</h1>
+</div>
+<div id="mapaObjetos" ng-controller="OpcionesController" lass="container" fade-in>
+    <div style="padding-top: 2em;">
+        <div class="jumbotron">
+        <p> En el siguiente mapa podemos observar todos los objetos que están registrados en el sistema de <strong>Auzonet</strong> y su ubicación en la ciudad. Para poder obtener más información sobre ellos, será necesario registrarse en el sistema. Pinchando en cada punto obtendremos información básica sobre el objeto.</p>
+            <!--
+                <div class="google-maps">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7098.94326104394!2d78.0430654485247!3d27.172909818538997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1385710909804" width="600" height="450" frameborder="0" style="border:0"></iframe>
+            </div>-->
+            <div class="google-maps" id="map"></div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
